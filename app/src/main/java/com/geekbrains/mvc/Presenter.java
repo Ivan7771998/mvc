@@ -3,11 +3,9 @@ package com.geekbrains.mvc;
 public class Presenter {
 
     private final Model mModel;
-    private final MainView mView;
 
-    public Presenter(MainView mainView) {
+    public Presenter() {
         mModel = new Model();
-        mView = mainView;
     }
 
     private int calcNewModelValue(int modelElementIndex) {
@@ -15,9 +13,9 @@ public class Presenter {
         return currentValue + 1;
     }
 
-    public void buttonClick(int index) {
+    public int buttonClick(int index) {
         int newModelValue = calcNewModelValue(index);
         mModel.setElementValueAtIndex(index, newModelValue);
-        mView.setButtonText(index, newModelValue);
+        return newModelValue;
     }
 }

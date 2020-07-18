@@ -1,14 +1,17 @@
 package com.geekbrains.mvc;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements MainView, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    /** Android Views **/
+    /**
+     * Android Views
+     **/
     private TextView tv1;
     private Button btnCounter1;
     private TextView tv2;
@@ -34,36 +37,26 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
         btnCounter2.setOnClickListener(this);
         btnCounter3.setOnClickListener(this);
 
-        mPresenter = new Presenter(this);
+        mPresenter = new Presenter();
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btnCounter1:
-                mPresenter.buttonClick(0);
+                btnCounter1.setText(generateStr(0));
                 break;
             case R.id.btnCounter2:
-                mPresenter.buttonClick(1);
+                btnCounter2.setText(generateStr(1));
                 break;
             case R.id.btnCounter3:
-                mPresenter.buttonClick(2);
+                btnCounter3.setText(generateStr(2));
                 break;
         }
     }
 
-    @Override
-    public void setButtonText(int btnIndex, int value) {
-        switch (btnIndex) {
-            case 0:
-                btnCounter1.setText("Количество = " + value);
-                break;
-            case 1:
-                btnCounter2.setText("Количество = " + value);
-                break;
-            case 2:
-                btnCounter3.setText("Количество = " + value);
-                break;
-        }
+    private String generateStr(int index) {
+        return getString(R.string.title_value_btn) + " " + mPresenter.buttonClick(index);
     }
+
 }
